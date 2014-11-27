@@ -24,9 +24,11 @@ class Board:
     def check(self, _request):
         cap = [(s == r) for s,r in zip(self.__secret, _request)]#.count(True)
 
-        (s_temp, r_temp) = zip(*[(s,r) for s,r in zip(self.__secret, _request) if (s != r)])
-
-        c = [(s in list(r_temp)) for s in list(s_temp)]#.count(True)
+        try:
+            (s_temp, r_temp) = zip(*[(s,r) for s,r in zip(self.__secret, _request) if (s != r)])
+            c = [(s in list(r_temp)) for s in list(s_temp)]#.count(True)
+        except:
+            c = []
 
         return ((cap.count(True), c.count(True)))
 
