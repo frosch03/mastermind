@@ -25,11 +25,10 @@ class Board:
         cAp = 0
         c   = 0
         for pos,col in enumerate(_request):
-            if col in self.__secret:
-                c   += 1
             if self.__secret[pos] == col:
                 cAp += 1
+            elif col in self.__secret:
+                c   += 1
         return ((cAp, c))
 
 
-    
