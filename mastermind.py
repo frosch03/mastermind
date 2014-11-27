@@ -24,10 +24,15 @@ class Board:
     def check(self, _request):
         cAp = 0
         c   = 0
-        for pos,col in enumerate(_request):
-            if self.__secret[pos] == col:
+        tmp_request = _request
+        tmp_secret = self.__secret
+        for pos,col in enumerate(tmp_request):
+            if tmp_secret[pos] == col:
                 cAp += 1
-            elif col in self.__secret:
+                del(tmp_secret[pos])
+                del(tmp_request[pos])
+        for pos,col in enumerate(tmp_request):
+            if col in tmp_secret:
                 c   += 1
         return ((cAp, c))
 
