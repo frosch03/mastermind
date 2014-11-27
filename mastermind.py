@@ -22,18 +22,12 @@ class Board:
 
     @check4four
     def check(self, _request):
-        cAp = 0
-        c   = 0
-        tmp_request = _request
-        tmp_secret = self.__secret
-        for pos,col in enumerate(tmp_request):
-            if tmp_secret[pos] == col:
-                cAp += 1
-                del(tmp_secret[pos])
-                del(tmp_request[pos])
-        for pos,col in enumerate(tmp_request):
-            if col in tmp_secret:
-                c   += 1
-        return ((cAp, c))
+        cap = [(s == r) for s,r in zip(self.__secret, _request)]#.count(True)
+
+        (s_temp, r_temp) = zip(*[(s,r) for s,r in zip(self.__secret, _request) if (s != r)])
+
+        c = [(s in list(r_temp)) for s in list(s_temp)]#.count(True)
+
+        return ((cap.count(True), c.count(True)))
 
 
