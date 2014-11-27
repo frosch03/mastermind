@@ -1,3 +1,4 @@
+from random import randint
 
 def check4four(f):
     def inner(self, lst):
@@ -7,6 +8,12 @@ def check4four(f):
         return (ret)
     return (inner)
 
+class A:
+    def __init__(self, length = 6):
+        self.alphabeth = range(1, length+1)
+
+    def word(self, length = 4):
+        return ( [ randint(1,len(self.alphabeth)) for i in range(length)] )
 
 class Board:
     @check4four
@@ -24,3 +31,5 @@ class Board:
                 cAp += 1
         return ((cAp, c))
 
+
+    
