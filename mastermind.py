@@ -9,11 +9,11 @@ def check4four(f):
     return (inner)
 
 class A:
-    def __init__(self, length = 6):
-        self.alphabeth = range(1, length+1)
+    def __init__(self, _alphabeth):
+        self.alphabeth = _alphabeth
 
     def word(self, length = 4):
-        return ( [ randint(1,len(self.alphabeth)) for i in range(length)] )
+        return ( [ self.alphabeth[randint(0, len(self.alphabeth) - 1 )] for i in range(length)] )
 
 class Board:
     @check4four
