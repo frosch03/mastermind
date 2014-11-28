@@ -33,3 +33,21 @@ class Board:
         return ((cap.count(True), c.count(True)))
 
 
+def genTree(_a, depth = 4):
+    def _genTree(_a, _depth):
+        if _depth > 0:
+            return([(_a.alphabeth[i], _genTree(_a, (_depth-1))) for i in range(len(_a.alphabeth))])
+        else:
+            return([])
+
+    return (("", _genTree(_a, depth)))
+    
+def leafs(_tree):
+    value    = _tree[0]
+    subtrees = _tree[1]
+
+    if len(subtrees) == 0:
+        return ([str(value)])
+
+    return ([(str(value) + leaf) for subtree in subtrees for leaf in leafs(subtree)])
+ 
