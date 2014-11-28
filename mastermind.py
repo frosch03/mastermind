@@ -15,26 +15,38 @@ class A:
     def word(self, length = 4):
         return ( [ self.alphabeth[randint(0, len(self.alphabeth) - 1 )] for i in range(length)] )
 
+
 class Board:
     @check4four
-    def __init__(self, _secret):
+    def __init__(self, _secret, ttl = 9):
         self.__secret = _secret
+        self.__ttl    = ttl
+        self.board    = []
+
+    def __str__(self):
+        ret = ""
+        for (r, a) in self.board:
+            ret = ("\n[%c%c%c%c] -> [%i|%i]"%(str(r[0]), str(r[1]), str(r[2]), str(r[3]), a[0],a[1])) + ret
+        return (ret[1:])
 
     @check4four
     def check(self, _request):
-        cap = [(s == r) for s,r in zip(self.__secret, _request)]#.count(True)
+        if self.__ttl > 0:
+            cap = [(s == r) for s,r in zip(self.__secret, _request)].count(True)
+            try:
+                (s_temp, r_temp) = zip(*[(s,r) for s,r in zip(self.__secret, _request) if (s != r)])
+                c = [(s in list(r_temp)) for s in list(s_temp)].count(True)
+            except:
+                c = []
 
-        try:
-            (s_temp, r_temp) = zip(*[(s,r) for s,r in zip(self.__secret, _request) if (s != r)])
-            c = [(s in list(r_temp)) for s in list(s_temp)]#.count(True)
-        except:
-            c = []
-
-        return ((cap.count(True), c.count(True)))
+            self.board.append(( _request , (cap, c) ))
+            self.__ttl -= 1
+            return ((cap, c))
 
 
 class Solutions:
     def __init__(self, _a, depth = 4):
+        self.__tree = ("", [])
         self.genTree(_a, depth)
 
     def genTree(self, _a, depth = 4):
@@ -66,3 +78,9 @@ class Solutions:
             else:
                 return (value, [deleteAt(subtree, _char, pos-1) for subtree in subtrees if subtree[0] != _char or (pos-1) != 0])
         self.__tree = inner_delete(self.__tree, _char, pos)
+
+class Game:
+    def __init__(self, _chars):
+        self.a     = A(_chars)
+        self.board = Board(self.a.word())
+        self.notes = Solutions(self.a)
