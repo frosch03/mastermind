@@ -1,5 +1,3 @@
-import cherrypy
-import json
 from random import randint
 
 def check4four(f):
@@ -10,23 +8,6 @@ def check4four(f):
         return (ret)
     return (inner)
 
-def withREST(o_class):
-    @cherrypy.expose
-    def get(self):
-        cherrypy.response.headers['Content-Type'] = "application/json"
-        return_tuple = {row[0] : row[1] for row in self.board}
-        return json.dumps(return_tuple)
-    
-    @cherrypy.expose
-    def post(self, _request):
-        self.check(_request)
-        return(self.get())
-
-    o_class.get  = get
-    o_class.post = post
-    return(o_class)
-
-
 class A:
     def __init__(self, _alphabeth):
         self.alphabeth = _alphabeth
@@ -35,8 +16,6 @@ class A:
         return ( [ self.alphabeth[randint(0, len(self.alphabeth) - 1 )] for i in range(length)] )
 
 
-
-@withREST
 class Board:
     @check4four
     def __init__(self, _secret, ttl = 9):
@@ -107,7 +86,3 @@ class Game:
         self.a     = A(_chars)
         self.board = Board(self.a.word())
         self.notes = Solutions(self.a)
-
-
-if __name__ == '__main__':
-    cherrypy.quickstart(Board((A("123456")).word()))
