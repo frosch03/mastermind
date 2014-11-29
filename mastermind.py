@@ -22,7 +22,6 @@ class Board:
         self.__secret = _secret
         self.__ttl    = ttl
         self.board    = []
-        self.ended  = False
 
     def __str__(self):
         ret = ""
@@ -32,7 +31,7 @@ class Board:
 
     @check4four
     def check(self, _request):
-        if self.__ttl > 0 and not self.ended:
+        if self.__ttl > 0:
             cap = [(s == r) for s,r in zip(self.__secret, _request)].count(True)
             try:
                 (s_temp, r_temp) = zip(*[(s,r) for s,r in zip(self.__secret, _request) if (s != r)])
@@ -42,8 +41,7 @@ class Board:
 
             self.board.append(( _request , (cap, c) ))
             self.__ttl -= 1
-            if cap >= 4: self.ended = True
-            return str((cap, c))
+            return ((cap, c))
 
 
 class Solutions:
@@ -85,4 +83,19 @@ class Game:
     def __init__(self, _chars):
         self.a     = A(_chars)
         self.board = Board(self.a.word())
+        self.ended = False
+        self.notes = Solutions(self.a)
+
+    def move(self, _try):
+        if not self.ended:
+            try:    (cap,c) = self.board.check(_try)
+            except: self.ended = True
+            if cap >= 4: self.ended = True
+
+    def new(self):
+        del(self.board)
+        self.board = Board(self.a.word())
+        self.ended = False
+
+        del(self.notes)
         self.notes = Solutions(self.a)
