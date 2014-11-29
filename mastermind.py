@@ -22,7 +22,7 @@ class Board:
         self.__secret = _secret
         self.__ttl    = ttl
         self.board    = []
-        self.__ended  = False
+        self.ended  = False
 
     def __str__(self):
         ret = ""
@@ -32,7 +32,7 @@ class Board:
 
     @check4four
     def check(self, _request):
-        if self.__ttl > 0 and not self.__ended:
+        if self.__ttl > 0 and not self.ended:
             cap = [(s == r) for s,r in zip(self.__secret, _request)].count(True)
             try:
                 (s_temp, r_temp) = zip(*[(s,r) for s,r in zip(self.__secret, _request) if (s != r)])
@@ -42,7 +42,7 @@ class Board:
 
             self.board.append(( _request , (cap, c) ))
             self.__ttl -= 1
-            if cap >= 4: self.__ended = True
+            if cap >= 4: self.ended = True
             return str((cap, c))
 
 
