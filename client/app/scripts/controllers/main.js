@@ -30,22 +30,14 @@ angular.module('mastermindApp')
 		        $scope.actualBoard.move[ndx] = $scope.actualColor;
 	      }
 
-	      $scope.send = function() {
-		        // $scope.game.board.push($scope.actualBoard);
-		        // $scope.actualBoard = { 
-			      //     move: [0,0,0,0]
-		        // };
-		        // return;
-		        Board.save({request: "1234"}, function (success) {
-                           console.log("1");
-                           console.log(success);
-                       }, function (error) {
-                           console.log("2")
-                           console.log(error);	
-                       });
-	          //	Board.move({ request: "1234" }, function(success) {
-	          //		console.log(success);
-	          //	});
+	      $scope.send = function(combi) {
+		        Board.save({request: $scope.actualBoard.move}, function (success) {
+                $scope.game = success;
+		            $scope.actualBoard = { 
+			              move: [0,0,0,0]
+		            };
+            }, function (error) {
+                console.log("error: "+error);	
+            });
 	      }
-	      
     });
