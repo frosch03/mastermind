@@ -25,8 +25,11 @@ def withREST(o_class):
     @cherrypy.expose
     @cherrypy.tools.json_in()
     def move(self):
-        data = cherrypy.request.json
-        o_move(self, data["request"])
+        try:
+            data = cherrypy.request.json
+            o_move(self, data["request"])
+        except:
+            pass
         return(self.get())
     o_class.move = move
 
@@ -36,10 +39,14 @@ Game = withREST(mastermind.Game)
 
 
 def CORS():
+    cherrypy.response.headers['Access-Control-Request-Headers'] = 'content-type'
+    cherrypy.response.headers['Access-Control-Allow-Methods']  = 'POST'
     cherrypy.response.headers['Access-Control-Allow-Origin'] = "*"
+    cherrypy.response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
 
 if __name__ == '__main__':
-    cherrypy.tools.CORS = cherrypy.Tool('before_finalize', CORS)
+    # cherrypy.tools.CORS = cherrypy.Tool('before_finalize', CORS)
+    cherrypy.tools.CORS = cherrypy.Tool('before_handler', CORS)
     cherrypy.tree.mount(Game([1,2,3,4,5,6]))
     cherrypy.server.socket_host = '10.0.101.42'
     cherrypy.engine.start()
