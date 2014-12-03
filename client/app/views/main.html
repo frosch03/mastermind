@@ -1,49 +1,75 @@
-<div class="jumbotron">
+<section layout="row">
+  <section layout="column" flex="40">
+    <md-toolbar class="md-theme-light">
+      <h1 class="md-toolbar-tools">
+        <span>Choose color</span>
+      </h1>
+    </md-toolbar>
+    <md-content>
+      <p>
+        <div class="btn-group" role="group" layout="row" layout-align="space-around center">
+          <md-button md-theme-watch="true" class="md-fab md-primary" md-theme="{{colorMap[actualBoard.move[0]]}}">
+          </md-button>
+          <md-button md-theme-watch="true" class="md-fab md-primary" md-theme="{{colorMap[actualBoard.move[1]]}}">
+          </md-button>
+          <md-button md-theme-watch="true" class="md-fab md-primary" md-theme="{{colorMap[actualBoard.move[2]]}}">
+          </md-button>
+          <md-button md-theme-watch="true" class="md-fab md-primary" md-theme="{{colorMap[actualBoard.move[3]]}}">
+          </md-button>
+        </div>
+      </p>
+      <p>
+        <section layout="row" layout-align="space-around center">
+          <section layout="column" layout-align="center center">
+            <md-button class="md-fab md-primary" md-theme="red" ng-click="setActualColor(1)">
+            </md-button>
+            <p></p>
+            <md-button class="md-fab md-primary" md-theme="brown" ng-click="setActualColor(2)">
+            </md-button>
+          </section>
+          <section layout="column" layout-align="center center">
+            <md-button class="md-fab md-primary" md-theme="indigo" ng-click="setActualColor(3)">
+            </md-button>
+            <p></p>
+            <md-button class="md-fab md-primary" md-theme="yellow" ng-click="setActualColor(4)">
+            </md-button>
+          </section>
+          <section layout="column" layout-align="center center">
+            <md-button class="md-fab md-primary" md-theme="green" ng-click="setActualColor(5)">
+            </md-button>
+            <p></p>
+            <md-button class="md-fab md-primary" md-theme="purple" ng-click="setActualColor(6)">
+            </md-button>
+          </section>
+        </section>
+      </p>
+    </md-content>
+  </section>
 
-  <h2>Choose color:</h2>
-  <md-section>
-    <section layout="row" layout-align="center center">
-      <section layout="column" layout-align="center center">
-        <md-button class="md-fab md-primary" md-theme="red" ng-click="setActualColor(1)">
-        </md-button>
-        <md-button class="md-fab md-primary" md-theme="brown" ng-click="setActualColor(2)">
-        </md-button>
-      </section>
-      <section layout="column" layout-align="center center">
-        <md-button class="md-fab md-primary" md-theme="indigo" ng-click="setActualColor(3)">
-        </md-button>
-        <md-button class="md-fab md-primary" md-theme="yellow" ng-click="setActualColor(4)">
-        </md-button>
-      </section>
-      <section layout="column" layout-align="center center">
-        <md-button class="md-fab md-primary" md-theme="green" ng-click="setActualColor(5)">
-        </md-button>
-        <md-button class="md-fab md-primary" md-theme="purple" ng-click="setActualColor(6)">
-        </md-button>
-      </section>
-    </section>
-  </md-section>
+  <section layout="column" layout-align="center center" flex="20">
+    <md-button class="md-primary" ng-click="reset()">New Game!</md-button>
+    <md-button class="md-raised md-primary" ng-click="send()">Fire!</md-button>
+  </section>
 
-  <h2>Play:</h2>
-  <div class="btn-group" role="group">
-    <md-button md-theme-watch="true" class="md-fab md-primary" md-theme="{{colorMap[actualBoard.move[0]]}}">
-    </md-button>
-    <md-button md-theme-watch="true" class="md-fab md-primary" md-theme="{{colorMap[actualBoard.move[1]]}}">
-    </md-button>
-    <md-button md-theme-watch="true" class="md-fab md-primary" md-theme="{{colorMap[actualBoard.move[2]]}}">
-    </md-button>
-    <md-button md-theme-watch="true" class="md-fab md-primary" md-theme="{{colorMap[actualBoard.move[3]]}}">
-    </md-button>
-    <md-button class="md-raised md-success" ng-click="send()">Fire!</md-button>
-  </div>
+  <section layout="column" flex="40">
+    <md-toolbar class="md-theme-light">
+      <h1 class="md-toolbar-tools">
+        <span>Board</span>
+      </h1>
+    </md-toolbar>
+    <md-content>
+      <p>
+        <div class="btn-group" role="group" layout="row" layout-align="space-around center"
+             ng-repeat="board in game.board | orderBy:board:reverse">
+          <p>
+          <md-button class="md-fab md-primary" md-theme="{{colorMap[board.move[0]]}}"></md-button>
+          <md-button class="md-fab md-primary" md-theme="{{colorMap[board.move[1]]}}"></md-button>
+          <md-button class="md-fab md-primary" md-theme="{{colorMap[board.move[2]]}}"></md-button>
+          <md-button class="md-fab md-primary" md-theme="{{colorMap[board.move[3]]}}"></md-button>
+          </p>
+        </div>
+      </p>
+    </md-content>
+  </section>
 
-  <h2>Played:</h2>
-  <div class="btn-group" role="group" layout="row" layout-align="center center"
-       ng-repeat="board in game.board | orderBy:board:reverse">
-    <md-button class="md-fab md-primary" md-theme="{{colorMap[board.move[0]]}}"> </md-button>
-    <md-button class="md-fab md-primary" md-theme="{{colorMap[board.move[1]]}}"> </md-button>
-    <md-button class="md-fab md-primary" md-theme="{{colorMap[board.move[2]]}}"> </md-button>
-    <md-button class="md-fab md-primary" md-theme="{{colorMap[board.move[3]]}}"> </md-button>
-    <br />
-  </div>
-</div>
+</section>

@@ -9,7 +9,7 @@
  */
 angular.module('mastermindApp')
     .controller('MainCtrl', function ($scope, $http, Board) {
-        $scope.colorMap = ['', 'red', 'brown', 'indigo', 'yellow', 'green', 'purple'];
+        $scope.colorMap = ['white', 'red', 'brown', 'indigo', 'yellow', 'green', 'purple'];
         $scope.index = 0;
         
 	      Board.get(function(success) {
@@ -35,7 +35,7 @@ angular.module('mastermindApp')
             if($scope.index == 3){$scope.index = 0;} else {$scope.index += 1;};
 	      }
 
-	      $scope.send = function(combi) {
+	      $scope.send = function() {
 		        Board.save({request: $scope.actualBoard.move}, function (success) {
                 $scope.game = success;
 		            $scope.actualBoard = { 
@@ -45,4 +45,10 @@ angular.module('mastermindApp')
                 console.log("error: "+error);	
             });
 	      }
+        $scope.reset = function() {
+            Board.delete();
+		        $scope.game = {
+			          state: "running",
+		        };
+        }
     });

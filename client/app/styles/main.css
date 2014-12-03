@@ -105,3 +105,8 @@ body {
   background-color: red;
 }
 
+
+. md-whiteframe {
+  background: #fff;
+  margin: 0px;
+  padding: 0px; }
