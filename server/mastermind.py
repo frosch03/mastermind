@@ -20,7 +20,7 @@ class Board:
     @check4four
     def __init__(self, _secret, ttl = 9):
         self.__secret = _secret
-        self.__ttl    = ttl
+        self.ttl      = ttl
         self.board    = []
 
     def __str__(self):
@@ -31,16 +31,16 @@ class Board:
 
     @check4four
     def check(self, _request):
-        if self.__ttl > 0:
+        if self.ttl > 0:
             cap = [(s == r) for s,r in zip(self.__secret, _request)].count(True)
             try:
                 (s_temp, r_temp) = zip(*[(s,r) for s,r in zip(self.__secret, _request) if (s != r)])
                 c = [(s in list(r_temp)) for s in list(s_temp)].count(True)
             except:
-                c = []
-
+                c = 0
+            
             self.board.append(( _request , (cap, c) ))
-            self.__ttl -= 1
+            self.ttl -= 1
             return ((cap, c))
 
 
