@@ -1,44 +1,49 @@
 <div class="jumbotron">
-  
+
   <h2>Choose color:</h2>
-  <div class="btn-group btn-group-xs color-buttons" role="group" aria-label="...">
-    <button type="button" class="btn btn-default color-1" 
-            ng-click="setActualColor('1')"></button>
-    <button type="button" class="btn btn-default color-2"
-            ng-click="setActualColor('2')"></button>
-    <button type="button" class="btn btn-default color-3"
-            ng-click="setActualColor('3')"></button>
-    <button type="button" class="btn btn-default color-4"
-            ng-click="setActualColor('4')"></button>
-    <button type="button" class="btn btn-default color-5"
-            ng-click="setActualColor('5')"></button>
-    <button type="button" class="btn btn-default color-6"
-            ng-click="setActualColor('6')"></button>
-  </div>
-  <h2>Actual Color:</h2>
-  <button type="button" class="btn btn-default color-{{actualColor}}"></button>
+  <md-section>
+    <section layout="row" layout-align="center center">
+      <section layout="column" layout-align="center center">
+        <md-button class="md-fab md-primary" md-theme="red" ng-click="setActualColor(1)">
+        </md-button>
+        <md-button class="md-fab md-primary" md-theme="brown" ng-click="setActualColor(2)">
+        </md-button>
+      </section>
+      <section layout="column" layout-align="center center">
+        <md-button class="md-fab md-primary" md-theme="indigo" ng-click="setActualColor(3)">
+        </md-button>
+        <md-button class="md-fab md-primary" md-theme="yellow" ng-click="setActualColor(4)">
+        </md-button>
+      </section>
+      <section layout="column" layout-align="center center">
+        <md-button class="md-fab md-primary" md-theme="green" ng-click="setActualColor(5)">
+        </md-button>
+        <md-button class="md-fab md-primary" md-theme="purple" ng-click="setActualColor(6)">
+        </md-button>
+      </section>
+    </section>
+  </md-section>
+
   <h2>Play:</h2>
-  <div class="btn-group" role="group" aria-label="...">
-    <button type="button" class="bla btn btn-default color-{{actualBoard.move[0]}}",
-            ng-click="setColor(0)">1</button>
-    <button type="button" class="btn btn-default color-{{actualBoard.move[1]}}"
-            ng-click="setColor(1)">2</button>
-    <button type="button" class="btn btn-default color-{{actualBoard.move[2]}}"
-            ng-click="setColor(2)">3</button>
-    <button type="button" class="btn btn-default color-{{actualBoard.move[3]}}"
-            ng-click="setColor(3)">4</button>
-    <button type="button" class="btn btn-success" ng-click="send()">Fire!</button>
+  <div class="btn-group" role="group">
+    <md-button md-theme-watch="true" class="md-fab md-primary" md-theme="{{colorMap[actualBoard.move[0]]}}">
+    </md-button>
+    <md-button md-theme-watch="true" class="md-fab md-primary" md-theme="{{colorMap[actualBoard.move[1]]}}">
+    </md-button>
+    <md-button md-theme-watch="true" class="md-fab md-primary" md-theme="{{colorMap[actualBoard.move[2]]}}">
+    </md-button>
+    <md-button md-theme-watch="true" class="md-fab md-primary" md-theme="{{colorMap[actualBoard.move[3]]}}">
+    </md-button>
+    <md-button class="md-raised md-success" ng-click="send()">Fire!</md-button>
   </div>
+
   <h2>Played:</h2>
-  <div class="btn-group move-buttons" role="group" aria-label="..."
+  <div class="btn-group" role="group" layout="row" layout-align="center center"
        ng-repeat="board in game.board | orderBy:board:reverse">
-    <button type="button" class="bla btn btn-default color-{{board.move[0]}}",
-            ng-click="setColor(0)">&nbsp;1&nbsp;</button>
-    <button type="button" class="btn btn-default color-{{board.move[1]}}"
-            ng-click="setColor(1)">&nbsp;2&nbsp;</button>
-    <button type="button" class="btn btn-default color-{{board.move[2]}}"
-            ng-click="setColor(2)">&nbsp;3&nbsp;</button>
-    <button type="button" class="btn btn-default color-{{board.move[3]}}"
-            ng-click="setColor(3)">&nbsp;4&nbsp;</button>
+    <md-button class="md-fab md-primary" md-theme="{{colorMap[board.move[0]]}}"> </md-button>
+    <md-button class="md-fab md-primary" md-theme="{{colorMap[board.move[1]]}}"> </md-button>
+    <md-button class="md-fab md-primary" md-theme="{{colorMap[board.move[2]]}}"> </md-button>
+    <md-button class="md-fab md-primary" md-theme="{{colorMap[board.move[3]]}}"> </md-button>
+    <br />
   </div>
 </div>

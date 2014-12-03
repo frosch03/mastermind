@@ -9,7 +9,9 @@
  */
 angular.module('mastermindApp')
     .controller('MainCtrl', function ($scope, $http, Board) {
-
+        $scope.colorMap = ['', 'red', 'brown', 'indigo', 'yellow', 'green', 'purple'];
+        $scope.index = 0;
+        
 	      Board.get(function(success) {
 		        $scope.game = success;
 		        console.log(success);
@@ -24,10 +26,13 @@ angular.module('mastermindApp')
 	      });
 
 	      $scope.setActualColor = function(cId) {
-		        $scope.actualColor = cId;
+		        $scope.actualColor = $scope.colorMap[cId];
+            $scope.setColor($scope.index, cId);
 	      }
-	      $scope.setColor = function(ndx) {
-		        $scope.actualBoard.move[ndx] = $scope.actualColor;
+
+	      $scope.setColor = function(ndx, cId) {
+		        $scope.actualBoard.move[ndx] = cId;
+            if($scope.index == 3){$scope.index = 0;} else {$scope.index += 1;};
 	      }
 
 	      $scope.send = function(combi) {
