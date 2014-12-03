@@ -48,6 +48,7 @@ if __name__ == '__main__':
     # cherrypy.tools.CORS = cherrypy.Tool('before_finalize', CORS)
     cherrypy.tools.CORS = cherrypy.Tool('before_handler', CORS)
     cherrypy.tree.mount(Game([1,2,3,4,5,6]))
-    cherrypy.server.socket_host = '10.0.101.42'
+    # cherrypy.server.socket_host = '10.0.101.42' # TT-LAN
+    cherrypy.server.socket_host = '127.0.0.1'
     cherrypy.engine.start()
     cherrypy.engine.block()
