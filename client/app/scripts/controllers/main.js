@@ -12,15 +12,21 @@ angular.module('mastermindApp')
 		        $scope.game = game;
             // if game ended :
             if (game.ttl == 0 || game.state != "running") {
-                $scope.ended = true
+                $scope.ended = true;
             };
             // if game ended by winning :
             if (game.ttl != 0 && game.state == "end") {
-                $scope.won = true
+                $scope.won = true;
             };
 		        $scope.actualBoard = { 
 			          move: [0,0,0,0]
 		        };
+        }
+
+        $scope.resetActualColor = function(pos) {
+            $scope.index = pos - 1;
+		        $scope.actualColor = $scope.colorMap[0];
+            $scope.setColor(pos, 0);
         }
 
 
