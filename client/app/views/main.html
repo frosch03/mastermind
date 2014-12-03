@@ -1,5 +1,10 @@
+  <md-toolbar md-theme="green" ng-show="won">
+    <div class="md-toolbar-tools" layout-align="center center">
+      <span class="md-flex">Congratulations</span>
+    </div>
+  </md-toolbar>
 <section layout="row">
-  <section layout="column" flex="40">
+  <section layout="column" flex="35">
     <md-toolbar class="md-theme-light">
       <h1 class="md-toolbar-tools">
         <span>Choose color</span>
@@ -46,12 +51,13 @@
     </md-content>
   </section>
 
-  <section layout="column" layout-align="center center" flex="20">
-    <md-button class="md-primary" ng-click="reset()">New Game!</md-button>
-    <md-button class="md-raised md-primary" ng-click="send()">Fire!</md-button>
+  <section layout="column" layout-align="start center" flex="15">
+    <md-button class="md-primary md-raised" ng-hide="!ended" ng-click="reset()">New Game</md-button>
+    <md-button class="md-primary" ng-hide="ended" ng-click="reset()">Restart</md-button>
+    <md-button class="md-primary" ng-disabled="ended" ng-click="send()">Set</md-button>
   </section>
 
-  <section layout="column" flex="40">
+  <section layout="column" flex="50">
     <md-toolbar class="md-theme-light">
       <h1 class="md-toolbar-tools">
         <span>Board</span>
@@ -67,6 +73,10 @@
           <md-button class="md-fab md-primary" md-theme="{{colorMap[board.move[2]]}}"></md-button>
           <md-button class="md-fab md-primary" md-theme="{{colorMap[board.move[3]]}}"></md-button>
           </p>
+          <section ng-animate-children>
+            <span shake id="badgeMessage" class="badge" style="background-color: black;">{{board.result[0]}}</span>
+            <span shake id="badgeMessage" class="badge" style="background-color: gray;">{{board.result[1]}}</span>
+          </section>
         </div>
       </p>
     </md-content>
