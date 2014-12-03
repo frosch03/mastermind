@@ -18,6 +18,7 @@ def withREST(o_class):
         return_dict = {}
         return_dict['board'] = [{"move": tuple(row[0]), "result": row[1]} for row in self.board.board]
         return_dict['state'] = "end" if self.ended else "running"
+        return_dict['ttl']   = self.board.ttl
         return json.dumps(return_dict)
     o_class.get  = get
     
@@ -40,9 +41,9 @@ Game = withREST(mastermind.Game)
 
 def CORS():
     cherrypy.response.headers['Access-Control-Request-Headers'] = 'content-type'
-    cherrypy.response.headers['Access-Control-Allow-Methods']  = 'POST'
-    cherrypy.response.headers['Access-Control-Allow-Origin'] = "*"
-    cherrypy.response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
+    cherrypy.response.headers['Access-Control-Allow-Methods']   = 'POST'
+    cherrypy.response.headers['Access-Control-Allow-Origin']    = "*"
+    cherrypy.response.headers['Access-Control-Allow-Headers']   = 'Content-Type'
 
 if __name__ == '__main__':
     # cherrypy.tools.CORS = cherrypy.Tool('before_finalize', CORS)
