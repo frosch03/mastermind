@@ -3,13 +3,13 @@ mastermind
 
 # Screenshoot #
 
-![https://github.com/frosch03/mastermind/blob/master/mastermind.png](https://github.com/frosch03/mastermind/blob/master/mastermind.png)
+![mastermind](https://github.com/frosch03/mastermind/blob/master/mastermind.png)
 
 # Downloading #
 
 Just simply clone the git repository:
 
-    git clone http://github.com/frosch03/mastermind
+    git clone https://github.com/frosch03/mastermind.git
 
 
 # Installing #
