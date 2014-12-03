@@ -15,9 +15,11 @@ angular
         'ngResource',
         'ngRoute',
         'ngSanitize',
-        'ngTouch'
+        'ngTouch',
+        'ngMaterial'
     ])
-    .constant('API_END_POINT', 'http://10.0.101.42:8080')
+    // .constant('API_END_POINT', 'http://10.0.101.42:8080') // TT-LAN
+    .constant('API_END_POINT', 'http://127.0.0.1:8080')
     .config(function ($routeProvider) {
         $routeProvider
             .when('/', {
